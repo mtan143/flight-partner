@@ -218,6 +218,7 @@ export default function CollapsibleTable() {
                         <TableCell style={{ textAlign: "center", color: '#1BA0E2', fontSize: '20px' }}>Tổng vé bán được</TableCell>
                         <TableCell style={{ textAlign: "center", color: '#1BA0E2', fontSize: '20px' }}>Tổng vé</TableCell>
                         <TableCell style={{ textAlign: "center", color: '#1BA0E2', fontSize: '20px' }}>Tổng tiền bán được</TableCell>
+                        <TableCell style={{ textAlign: "center", color: '#1BA0E2', fontSize: '20px' }}>Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody >
