@@ -40,19 +40,19 @@ function Row(props) {
     const [status, setStatus] = useState(row.flightStatus);
     const classes = useRowStyles();
     const t = (List) => {
-        let total=0;
-        for(var i = 0 ;i < 4; i++){ 
+        let total = 0;
+        for (var i = 0; i < 4; i++) {
             total += (List[i]?.quantity - List[i]?.remainingQuantity);
         };
         return total;
     };
     function formatVnd(n, currency) {
         return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
-      };
+    };
     const tMoney = (List) => {
-        let total=0;
-        for(var i = 0 ;i < 4; i++){ 
-            total += (List[i]?.price*(List[i]?.quantity - List[i]?.remainingQuantity));
+        let total = 0;
+        for (var i = 0; i < 4; i++) {
+            total += (List[i]?.price * (List[i]?.quantity - List[i]?.remainingQuantity));
         };
         return total;
     }
@@ -72,6 +72,7 @@ function Row(props) {
                 <TableCell style={{ textAlign: "center" }}>{row.timeDeparture}-{row.timeArrival}</TableCell>
                 <TableCell style={{ textAlign: "center" }}>{t(row.classTypeList)}</TableCell>
                 <TableCell style={{ textAlign: "center" }}>{row.quantityTicket}</TableCell>
+<<<<<<< Updated upstream
                 <TableCell style={{ textAlign: "center" }}>{formatVnd(tMoney(row.classTypeList)," VNĐ")}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>
                 <Box sx={{ minWidth: 120 }}>
@@ -109,6 +110,9 @@ function Row(props) {
       </FormControl>
       </Box>
                                             </TableCell>
+=======
+                <TableCell style={{ textAlign: "center" }}>{formatVnd(tMoney(row.classTypeList), " VNĐ")}</TableCell>
+>>>>>>> Stashed changes
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0, color: '#FF6F00', backgroundColor: '#E8EAF6' }} colSpan={12}>
@@ -143,18 +147,18 @@ function Row(props) {
                                 </TableHead>
                                 <TableBody>
                                     {row.classTypeList.map((flightDetailRow) => (
-                                         
+
                                         <TableRow key={flightDetailRow.classTypes} >
                                             <TableCell component="th" scope="row" style={{ textAlign: 'left' }}>
                                                 {flightDetailRow.classType}
                                             </TableCell>
                                             <TableCell style={{ textAlign: 'center' }}>{flightDetailRow.quantity}</TableCell>
                                             <TableCell style={{ textAlign: 'center' }}>{(flightDetailRow.quantity - flightDetailRow.remainingQuantity)}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>{formatVnd(flightDetailRow.price ," VNĐ")}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>{formatVnd((flightDetailRow.price  * flightDetailRow.quantity)," VNĐ")}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>{formatVnd(flightDetailRow.price, " VNĐ")}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>{formatVnd((flightDetailRow.price * flightDetailRow.quantity), " VNĐ")}</TableCell>
                                             <TableCell style={{ textAlign: 'center' }}>
                                                 {/* {Math.round(flightDetailRow.amount * row.price * 100) / 100} */}
-                                                {formatVnd(flightDetailRow.price *(flightDetailRow.quantity - flightDetailRow.remainingQuantity)," VNĐ")}
+                                                {formatVnd(flightDetailRow.price * (flightDetailRow.quantity - flightDetailRow.remainingQuantity), " VNĐ")}
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -190,20 +194,19 @@ Row.propTypes = {
 export default function CollapsibleTable() {
 
     useEffect(() => {
-        const fetchFlights = async () =>{ 
-            try{
+        const fetchFlights = async () => {
+            try {
                 const flightList = await flightApi.getAll("AL978AWBCDVJ");
-                console.log(flightList.data);
-                setList(flightList.data); 
-             }
-             catch (error){
-                    console.log('Fail to fetch flight list', error);
-             }
+                setList(flightList.data);
+            }
+            catch (error) {
+                console.log('Fail to fetch flight list', error);
+            }
         }
         fetchFlights();
-    },[]);
+    }, []);
     const [list, setList] = useState([]);
-    
+
     return (
 
         <TableContainer component={Paper} style={{ marginTop: '40px', }}>
